@@ -30,7 +30,6 @@ environment:
 
 
 dependencies:
-  flutter_randomcolor: ^1.0.16
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
