@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timer/themes/colorTheme.dart';
+import 'package:timer/themes/customTheme.dart';
 
-final Color _main_foreground_theme = Colortheme().app_foreground_theme;
-final Color _main_background_theme = Colortheme().app_background_theme;
-final Color _main_depth_accent = Colortheme().app_depth_accent;
-final Color _main_secondary_accent = Colortheme().app_secondary_accent;
+Color _main_foreground_theme = Colortheme().app_foreground_theme;
+Color _main_background_theme = Colortheme().app_background_theme;
+Color _main_depth_accent = Colortheme().app_depth_accent;
+Color _main_secondary_accent = Colortheme().app_secondary_accent;
 
 void _showClockPicker(BuildContext context, ValueChanged<ClockType> onSelect) {
   showModalBottomSheet(
