@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timer/themes/customTheme.dart';
-
-Color _main_foreground_theme = Colortheme().app_foreground_theme;
-Color _main_background_theme = Colortheme().app_background_theme;
-Color _main_depth_accent = Colortheme().app_depth_accent;
-Color _main_secondary_accent = Colortheme().app_secondary_accent;
+//import 'package:timer/themes/customTheme.dart';
 
 void _showClockPicker(BuildContext context, ValueChanged<ClockType> onSelect) {
   showModalBottomSheet(
@@ -13,6 +8,10 @@ void _showClockPicker(BuildContext context, ValueChanged<ClockType> onSelect) {
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
     builder: (_) {
+      final cs = Theme.of(context).colorScheme;
+      final textStyle = Theme.of(
+        context,
+      ).textTheme.bodyMedium?.copyWith(color: cs.primary);
       final items = ClockType.values;
       return Align(
         alignment: Alignment.bottomCenter,
@@ -22,7 +21,7 @@ void _showClockPicker(BuildContext context, ValueChanged<ClockType> onSelect) {
             constraints: const BoxConstraints(maxWidth: 360),
             child: Container(
               decoration: BoxDecoration(
-                color: _main_depth_accent,
+                color: cs.surface,
                 borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(24),
                   bottom: Radius.circular(24),
@@ -47,16 +46,9 @@ void _showClockPicker(BuildContext context, ValueChanged<ClockType> onSelect) {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            type.icon,
-                            size: 20,
-                            color: _main_foreground_theme,
-                          ),
+                          Icon(type.icon, size: 20, color: cs.primary),
                           const SizedBox(width: 12),
-                          Text(
-                            type.label,
-                            style: TextStyle(color: _main_foreground_theme),
-                          ),
+                          Text(type.label, style: textStyle),
                         ],
                       ),
                     ),
@@ -88,14 +80,15 @@ class Displayscreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final cs = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: _main_background_theme,
+      backgroundColor: cs.background,
       appBar: AppBar(title: const Text('Example')),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 32.0),
         child: FloatingActionButton(
-          backgroundColor: _main_foreground_theme,
-          foregroundColor: _main_depth_accent,
+          backgroundColor: cs.primary,
+          foregroundColor: cs.surface,
           onPressed: () {
             _showClockPicker(context, (type) {
               // TODO: handle selected type (create model, navigate, etc.)
